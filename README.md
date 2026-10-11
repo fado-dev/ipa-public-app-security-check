@@ -23,6 +23,9 @@ IPA の注意喚起と同じ 3 領域に「対応体制」を加えた 4 領域�
 ```
 public-app-security-check/
 ├── SKILL.md                      # 手順（Claude が読む本体）
+├── README.md / LICENSE (MIT)
+├── examples/
+│   └── sample-access.log         # scan_logs.sh の動作確認用
 ├── references/
 │   ├── checklist.md              # IPA/JPCERT の点検・強化策の全項目チェックリスト
 │   ├── ioc.md                    # 不審 IP・User-Agent・手口別の痕跡（scan_logs.sh が読み込む）
