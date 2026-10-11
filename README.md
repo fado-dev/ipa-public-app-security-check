@@ -4,7 +4,7 @@ IPA 注意喚起「不正アクセスによる漏えい等の事案を踏まえ�
 JPCERT/CC 注意喚起（JPCERT-AT-2026-0030）に基づいて、外部公開アプリケーションの緊急セキュリティ点検と、
 CSIRT/CERT 観点でのインシデント対応チェックを行う Claude 用スキルです。
 
-Claude Code / Claude Cowork で動作し、対象リポジトリや環境を読み取って点検し、経営者向けサマリー付きの Markdown レポートを出力します。
+Claude Code / Claude Cowork のスキルとして使えるほか、`AGENTS.md` を読める他の AI エージェント（Codex、Cursor、Gemini CLI など）や、手順書・チェックリストとして人手でも使えます。対象リポジトリや環境を読み取って点検し、経営者向けサマリー付きの Markdown レポートを出力します。
 
 ## 何をするか
 
@@ -22,7 +22,8 @@ IPA の注意喚起と同じ 3 領域に「対応体制」を加えた 4 領域�
 
 ```
 public-app-security-check/
-├── SKILL.md                      # 手順（Claude が読む本体）
+├── SKILL.md                      # 手順（本体。Claude ではスキルとして読み込まれる）
+├── AGENTS.md                     # Claude 以外の AI エージェント向けの入口
 ├── README.md / LICENSE (MIT)
 ├── examples/
 │   └── sample-access.log         # scan_logs.sh の動作確認用
@@ -55,6 +56,17 @@ git clone https://github.com/fado-dev/ipa-public-app-security-check.git \
 ### Claude Cowork（デスクトップアプリ）
 
 このリポジトリを zip でダウンロードし、設定 → スキル からフォルダを追加してください。
+
+### Claude 以外の AI エージェント・人手で使う
+
+リポジトリを clone し、対象のリポジトリ（または作業ディレクトリ）から読める場所に置きます。
+
+```bash
+git clone https://github.com/fado-dev/ipa-public-app-security-check.git
+```
+
+- **AI エージェント**: `AGENTS.md` を読み込ませ、「`SKILL.md` の手順に従って公開アプリのセキュリティチェックをして」と依頼します。ツール固有の指示ファイル（`.cursor/rules`、`GEMINI.md` など）から `AGENTS.md` を参照させても構いません。
+- **人手**: `SKILL.md` の手順に沿って `references/checklist.md` を埋め、`scripts/` のスクリプトを実行し、`references/report-template.md` にまとめます。スクリプトは bash のみで動作します。
 
 ## 使い方
 
